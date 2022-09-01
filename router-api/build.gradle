@@ -8,6 +8,10 @@ plugins {
 android {
     compileSdkVersion 31
 
+//    publishing {
+//        singleVariant("release")
+//    }
+
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 31
@@ -35,28 +39,22 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
 
-    afterEvaluate {
-        publishing {
-            def versionName = "1.0.6"
-            publications {
-                release(MavenPublication) {
-                    from components.release
-                    groupId = 'com.crystallake.ydslib'
-                    artifactId = 'router-api'
-                    version = versionName
-                }
-            }
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
 
-            repositories {
-                // 下面这部分，不是很清楚加不加，但是最后加上
-                maven {
-                    // change URLs to point to your repos, e.g. http://my.org/repo
-                    def baseUrl = buildDir.getParent()
-                    def releasesRepoUrl = "$baseUrl/repos/releases"
-                    def snapshotsRepoUrl = "$baseUrl/repos/snapshots"
-                    url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-                }
+afterEvaluate {
+    publishing {
+        def versionName = "1.0.7"
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.crystallake.ydslib'
+                artifactId = 'router-api'
+                version = versionName
             }
         }
     }
@@ -69,9 +67,4 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'com.github.ydslib:router-annotation:1.0.6'
     kapt 'com.github.ydslib:router-compiler:1.0.6'
-}
-
-task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
 }
