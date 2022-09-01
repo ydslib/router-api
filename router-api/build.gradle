@@ -38,7 +38,7 @@ android {
 
     afterEvaluate {
         publishing {
-            def versionName = "1.0.5"
+            def versionName = "1.0.6"
             publications {
                 release(MavenPublication) {
                     from components.release
