@@ -47,9 +47,6 @@ afterEvaluate{
         publications{
             release(MavenPublication){
                 from components.release
-                groupId 'com.github.ydslib'
-                artifactId 'router-api'
-                version '1.0.8'
             }
         }
     }
