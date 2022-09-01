@@ -1,0 +1,3 @@
+rootProject.name = "RouterApi"
+include ':app'
+include ':router-api'
