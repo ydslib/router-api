@@ -149,7 +149,7 @@ class Router {
         if (path.isNullOrEmpty() && path?.contains(".") == false) {
             throw HandlerException(TAG + "Extract the default group failed, the path must has 2 element")
         }
-        try {
+        return try {
             val defaultGroup = path?.substring(0, path.indexOf("."))
             if (defaultGroup?.isEmpty() == true) {
                 throw HandlerException(TAG + "Extract the default group failed! ")
@@ -159,7 +159,6 @@ class Router {
         } catch (e: Exception) {
             null
         }
-        return null
     }
 
     fun completion(postcard: Postcard?) {
